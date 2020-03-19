@@ -17,7 +17,37 @@ axios
 
    Skip to Step 3.
 */
+const gitCard = gitData => {
+  const card = document.createElement("div");
+  const profilePic = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const username = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const profilelink = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
 
+  card.appendChild(profilePic);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profilelink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  username.classList("username");
+
+  return gitCard;
+};
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
@@ -36,7 +66,6 @@ const followersArray = [];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
-
 <div class="card">
   <img src={image url of user} />
   <div class="card-info">
@@ -51,9 +80,43 @@ const followersArray = [];
     <p>Bio: {users bio}</p>
   </div>
 </div>
-
 */
 
+// function gitCard(
+//   card,
+//   image,
+//   name,
+//   username,
+//   location,
+//   profile,
+//   profileLink,
+//   followers,
+//   following,
+//   bio
+// ) {
+//   const createCard = document.createElement("div");
+//   const userImage = document.createElement("img");
+//   const peopleName = document.createElement("h3");
+//   const userName = document.createElement("p");
+//   const userLocation = document.createElement("p");
+//   const profile = document.createElement("p");
+//   const profileLink = document.createElement("a");
+//   const userFollowers = document.createElement("p");
+//   const userFollowing = document.createElement("p");
+//   const bio = document.createElement("p");
+
+//   createCard.appendChild(userImage);
+//   cardContainer.appendChild(name);
+//   infoContainer.appendChild(username);
+//   infoContainer.appendChild(location);
+//   infoContainern.appendChild(profile);
+//   profile.appendChild(profileLink);
+//   profileLink.appendChild(followers);
+//   userFollowers.appendChild(following);
+//   userFollowing.appendChild(bio);
+
+//   return createCard;
+// }
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
