@@ -9,6 +9,9 @@ axios
   })
   .catch(err => {
     console.log("something is wrong");
+  })
+  .then(() => {
+    console.log("yahoo!");
   });
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
@@ -30,6 +33,12 @@ const gitCard = gitData => {
   const following = document.createElement("p");
   const bio = document.createElement("p");
 
+  profilePic.src = data.avatar_url;
+  name.textContent = data.name;
+  username.textContent = data.login;
+  location.textContent = data.location;
+  profilelink.textContent = data;
+
   card.appendChild(profilePic);
   card.appendChild(cardInfo);
   cardInfo.appendChild(name);
@@ -46,8 +55,9 @@ const gitCard = gitData => {
   name.classList.add("name");
   username.classList("username");
 
-  return gitCard;
+  return card;
 };
+
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
