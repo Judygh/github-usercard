@@ -9,6 +9,47 @@
 
    Skip to Step 3.
 */
+const gitCard = data => {
+  const card = document.createElement("div");
+  const profilePic = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const username = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const profilelink = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+
+  profilePic.src = data.avatar_url;
+  name.textContent = data.name;
+  username.textContent = data.login;
+  location.textContent = data.location;
+  profilelink.textContent = data.html_url;
+  profilelink.href = data.html_url;
+  followers.textContent = data.followers;
+  following.textContent = data.following;
+  bio.textContent = data.bio;
+
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  username.classList.add("username");
+
+  card.appendChild(profilePic);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profilelink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  return card;
+};
 
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
@@ -28,7 +69,6 @@ const followersArray = [];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
-
 <div class="card">
   <img src={image url of user} />
   <div class="card-info">
@@ -43,9 +83,43 @@ const followersArray = [];
     <p>Bio: {users bio}</p>
   </div>
 </div>
-
 */
 
+// function gitCard(
+//   card,
+//   image,
+//   name,
+//   username,
+//   location,
+//   profile,
+//   profileLink,
+//   followers,
+//   following,
+//   bio
+// ) {
+//   const createCard = document.createElement("div");
+//   const userImage = document.createElement("img");
+//   const peopleName = document.createElement("h3");
+//   const userName = document.createElement("p");
+//   const userLocation = document.createElement("p");
+//   const profile = document.createElement("p");
+//   const profileLink = document.createElement("a");
+//   const userFollowers = document.createElement("p");
+//   const userFollowing = document.createElement("p");
+//   const bio = document.createElement("p");
+
+//   createCard.appendChild(userImage);
+//   cardContainer.appendChild(name);
+//   infoContainer.appendChild(username);
+//   infoContainer.appendChild(location);
+//   infoContainern.appendChild(profile);
+//   profile.appendChild(profileLink);
+//   profileLink.appendChild(followers);
+//   userFollowers.appendChild(following);
+//   userFollowing.appendChild(bio);
+
+//   return createCard;
+// }
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
@@ -53,3 +127,18 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+const entryPoint = document.querySelector(".cards");
+axios
+  .get("https://api.github.com/users/judygh")
+  .then(response => {
+    console.log("my info", response.data);
+    const data = response.data;
+    entryPoint.appendChild(gitCard(data));
+  })
+  .catch(err => {
+    console.log("something is wrong", err);
+  })
+  .then(() => {
+    console.log("yahoo!");
+  });
