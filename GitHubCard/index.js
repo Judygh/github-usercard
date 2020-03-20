@@ -2,17 +2,6 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-axios
-  .get("https://api.github.com/users/judygh")
-  .then(response => {
-    console.log("my info", response.data);
-  })
-  .catch(err => {
-    console.log("something is wrong");
-  })
-  .then(() => {
-    console.log("yahoo!");
-  });
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -20,7 +9,7 @@ axios
 
    Skip to Step 3.
 */
-const gitCard = gitData => {
+const gitCard = data => {
   const card = document.createElement("div");
   const profilePic = document.createElement("img");
   const cardInfo = document.createElement("div");
@@ -37,7 +26,16 @@ const gitCard = gitData => {
   name.textContent = data.name;
   username.textContent = data.login;
   location.textContent = data.location;
-  profilelink.textContent = data;
+  profilelink.textContent = data.html_url;
+  profilelink.href = data.html_url;
+  followers.textContent = data.followers;
+  following.textContent = data.following;
+  bio.textContent = data.bio;
+
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  username.classList.add("username");
 
   card.appendChild(profilePic);
   card.appendChild(cardInfo);
@@ -49,11 +47,6 @@ const gitCard = gitData => {
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
-
-  card.classList.add("card");
-  cardInfo.classList.add("card-info");
-  name.classList.add("name");
-  username.classList("username");
 
   return card;
 };
@@ -134,3 +127,18 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+const entryPoint = document.querySelector(".cards");
+axios
+  .get("https://api.github.com/users/judygh")
+  .then(response => {
+    console.log("my info", response.data);
+    const data = response.data;
+    entryPoint.appendChild(gitCard(data));
+  })
+  .catch(err => {
+    console.log("something is wrong", err);
+  })
+  .then(() => {
+    console.log("yahoo!");
+  });
